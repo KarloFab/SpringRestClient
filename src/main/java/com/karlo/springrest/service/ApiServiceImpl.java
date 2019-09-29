@@ -1,6 +1,7 @@
 package com.karlo.springrest.service;
 
 import com.karlo.springrest.domain.User;
+import com.karlo.springrest.domain.UserData;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,6 +18,9 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     public List<User> getUsers(Integer limit) {
-        return null;
+        UserData userData = restTemplate
+                .getForObject("https://private-anon-a1ae473ace-apifaketory.apiary-mock.com/api/user?limit=" + limit,
+                        UserData.class);
+        return userData.getData();
     }
 }
